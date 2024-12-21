@@ -61,6 +61,7 @@
                 </ListBox>
                 <StackPanel Grid.Column="1">
                     <Button Height="100" Click="Button_Click" Content="Заменить"/>
+                    
                     <Button Height="100" Content="Обновить"/>
                 </StackPanel>
                 
