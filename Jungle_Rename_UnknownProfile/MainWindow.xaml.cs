@@ -28,9 +28,13 @@ namespace Jungle_Rename_UnknownProfile
         public ControlWindow controlWindow;
         private string mapPath = "mekhanobr_mapping.csv";
         List<PairReplacement> replacementList;
+        TSM.Model Model { get; set; }
         public MainWindow()
         {
             InitializeComponent();
+            Model = new TSM.Model();
+            if(Model.GetConnectionStatus())
+                Connct_Bar.Jungle_Connect = true;
             controlWindow = new ControlWindow();
             this.DataContext = controlWindow;
             replacementList = GetReplacementList();
@@ -121,7 +125,7 @@ namespace Jungle_Rename_UnknownProfile
             {
                 string profOld = reportClass.UnknownProfile;
                 string profNew = reportClass.NewProfile;
-                if(profOld != string.Empty)
+                if(profNew != string.Empty)
                 {
                     TSM.ModelObjectEnumerator modelObjectEnumerator = Tools.GetModelObjectEnumerator(profOld);
                     while (modelObjectEnumerator.MoveNext())
@@ -139,6 +143,13 @@ namespace Jungle_Rename_UnknownProfile
 
             }
             
+            Model.CommitChanges();
+            
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            controlWindow.ListReport = ReadUnknownProfile();
         }
     }
 }
