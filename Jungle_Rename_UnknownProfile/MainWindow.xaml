@@ -1,0 +1,71 @@
+﻿<Window x:Class="Jungle_Rename_UnknownProfile.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Jungle_Rename_UnknownProfile"
+        xmlns:JUC="clr-namespace:Jungle_User_Controls;assembly=Jungle_User_Controls"
+        mc:Ignorable="d"
+        MinHeight="200"
+        MinWidth="400"
+        WindowStyle="None" ResizeMode="CanResizeWithGrip"
+        BorderThickness="0" 
+        Title="MainWindow" Height="450" Width="800" Topmost="True">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0"/>
+    </WindowChrome.WindowChrome>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <JUC:Mekhanobr_Title_bar 
+            KeyboardNavigation.IsTabStop="False"
+            Jungle_Application_Close="Mekhanobr_Title_bar_Jungle_Application_Close" Jungle_Application_DragMove="Mekhanobr_Title_bar_Jungle_Application_DragMove" />
+        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="2 0 2 2">
+            
+        </Border>
+        <Border Grid.Row="2" BorderBrush="Black" BorderThickness="2 0 2 2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                <ListBox 
+                    KeyboardNavigation.TabNavigation="Cycle"
+                    x:Name="listBoxFiles" ItemsSource="{Binding ListReport,
+                    Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="IsTabStop" Value="False"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel 
+                    
+                        Margin="5 0 0 0" Height="30" Orientation="Horizontal">
+                                <CheckBox
+                            KeyboardNavigation.IsTabStop="False"
+                            IsChecked="{Binding Path=Flag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBlock Text="{Binding Path=UnknownProfile}"
+                                   MinWidth="100"/>
+                                <TextBox MinWidth="100" Width="200"
+                            Text="{Binding Path=NewProfile, Mode=TwoWay,
+                            UpdateSourceTrigger=PropertyChanged}"/>
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <StackPanel Grid.Column="1">
+                    <Button Height="100" Click="Button_Click" Content="Заменить"/>
+                    <Button Height="100" Content="Обновить"/>
+                </StackPanel>
+                
+            </Grid>
+        </Border>
+        
+    </Grid>
+</Window>
