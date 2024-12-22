@@ -22,7 +22,7 @@ namespace Jungle_Rename_UnknownProfile.Core
             TSF.BinaryFilterExpression AA = new TSF.BinaryFilterExpression(objectType, TSF.NumericOperatorType.IS_EQUAL, type);
 
             TSFC.PartFilterExpressions.Profile profileExpression = new TSFC.PartFilterExpressions.Profile();
-            TSF.StringConstantFilterExpression partProfile = new StringConstantFilterExpression(profFind);
+            TSF.StringConstantFilterExpression partProfile = new StringConstantFilterExpression(ConvertToCP1251(profFind));
             TSF.BinaryFilterExpression A = new BinaryFilterExpression(profileExpression, StringOperatorType.IS_EQUAL, partProfile);
 
             TSF.BinaryFilterExpressionCollection expressionCollection = new BinaryFilterExpressionCollection();
@@ -30,6 +30,18 @@ namespace Jungle_Rename_UnknownProfile.Core
             expressionCollection.Add(new BinaryFilterExpressionItem(A, BinaryFilterOperatorType.BOOLEAN_AND));
 
             return model.GetModelObjectSelector().GetObjectsByFilter(expressionCollection);
+        }
+
+
+        private static string ConvertToCP1251(string text)
+        {
+            Encoding utf8 = Encoding.GetEncoding("UTF-8");
+            Encoding win1251 = Encoding.GetEncoding("Windows-1251");
+
+            byte[] utf8Bytes = win1251.GetBytes(text);
+            byte[] win1251Bytes = Encoding.Convert(utf8, win1251, utf8Bytes);
+
+            return win1251.GetString(win1251Bytes);
         }
     }
 }

@@ -1,2 +1,15 @@
 V1
 2:ReportClass,V
+2:Flag,d
+2:get_d_,m
+2:set_m_,F
+2:UnknownProfile,n
+2:get_n_,Y
+2:set_Y_,q
+2:NewProfile,d6
+2:get_d6_,i
+2:set_i_,U
+2:Equals,j
+2:obj,a
+2:class,mL
+2:ToString,nN

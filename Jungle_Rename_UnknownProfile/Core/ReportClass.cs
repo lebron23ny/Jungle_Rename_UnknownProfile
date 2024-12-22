@@ -15,9 +15,8 @@ namespace Jungle_Rename_UnknownProfile.Core
 
         public int CompareTo(object obj)
         {
-            ReportClass a = this;
-            ReportClass b = obj as ReportClass;
-            return string.Compare(a.UnknownProfile, b.UnknownProfile);
+            ReportClass other = obj as ReportClass;
+            return UnknownProfile.CompareTo(other.UnknownProfile);
         }
 
         public override bool Equals(object obj)

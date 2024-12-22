@@ -56,6 +56,7 @@ namespace Jungle_Rename_UnknownProfile
         public ObservableCollection<ReportClass> ReadUnknownProfile()
         {
             ObservableCollection<ReportClass> reportCollection = new ObservableCollection<ReportClass>();
+            List<ReportClass> listRepot = new List<ReportClass>();
             TSM.Model model = new TSM.Model();
             if (model.GetConnectionStatus())
             {
@@ -73,9 +74,17 @@ namespace Jungle_Rename_UnknownProfile
                         {
                             string newProf = GetNewProfile(profile);
                             if(newProf != string.Empty)
+                            {
                                 reportCollection.Add(new ReportClass { Flag = true, UnknownProfile = profile, NewProfile = GetNewProfile(profile) });
+                                listRepot.Add(new ReportClass { Flag = true, UnknownProfile = profile, NewProfile = GetNewProfile(profile) });
+                            }
+                                
                             else
+                            {
                                 reportCollection.Add(new ReportClass { Flag = false, UnknownProfile = profile, NewProfile = GetNewProfile(profile) });
+                                listRepot.Add(new ReportClass { Flag = false, UnknownProfile = profile, NewProfile = GetNewProfile(profile) });
+                            }
+                                
                         }
                             
 
@@ -84,8 +93,8 @@ namespace Jungle_Rename_UnknownProfile
                 }
             }
 
-
-
+            listRepot.Sort();
+            reportCollection = new ObservableCollection<ReportClass>(listRepot);
             return reportCollection;
         }
 
@@ -149,6 +158,7 @@ namespace Jungle_Rename_UnknownProfile
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            replacementList = GetReplacementList();
             controlWindow.ListReport = ReadUnknownProfile();
         }
     }
